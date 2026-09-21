@@ -1,0 +1,55 @@
+# Research agent configuration.
+# Edit the keyword lists below to change what the agent looks for.
+# No coding knowledge needed to change this file.
+
+# How many days back to search each time the agent runs.
+# Keep this slightly larger than the run interval so nothing slips
+# through the gap between runs (the dedup step stops duplicates).
+lookback_days: 2
+
+# Minimum relevance score (1-5, assigned by Claude) an item needs
+# to be written to the sheet. Raise this to see fewer, higher-signal
+# items; lower it to see more.
+relevance_threshold: 3
+
+# Max raw items pulled per source per run, before relevance filtering.
+max_items_per_source: 25
+
+# Claude model used for relevance scoring + summarizing.
+# claude-haiku-4-5-20251001 is fast and cheap, which is enough for
+# this classification/summarization task. Swap in claude-sonnet-5
+# for higher-quality summaries at higher cost.
+claude_model: "claude-haiku-4-5-20251001"
+
+# Google Sheet tab names. Change these only if you also rename the
+# tabs in the actual spreadsheet.
+sheet_tabs:
+  papers: "Papers"
+  posts: "Social Posts (X)"
+  run_log: "Run Log"
+
+# Search terms, grouped by topic. The agent searches the union of
+# all terms below, then asks Claude to tag each result with one of
+# these topic names (or "Cross-cutting" if it spans more than one).
+topics:
+  RNA Therapeutics:
+    - "mRNA therapeutics"
+    - "siRNA therapy"
+    - "antisense oligonucleotide"
+    - "self-amplifying RNA"
+    - "circular RNA therapeutics"
+    - "RNA editing therapy"
+    - "mRNA vaccine platform"
+  LNP Engineering:
+    - "lipid nanoparticle"
+    - "ionizable lipid"
+    - "LNP formulation"
+    - "nanoparticle drug delivery"
+    - "PEG-lipid"
+    - "LNP manufacturing"
+  Oncology:
+    - "cancer immunotherapy"
+    - "tumor targeting therapy"
+    - "oncology drug delivery"
+    - "mRNA cancer vaccine"
+    - "personalized cancer neoantigen"
